@@ -1,0 +1,75 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #3772FF;
+    color: #080708;
+}
+
+h1 {
+    font-size: 3vw;
+    text-align: center;
+    margin: 1vw;
+
+}
+
+.flex-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p {
+    font-size: 1.5vw;
+    font-weight: 700;
+}
+
+.image-cont {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1vw;
+    width: 100vw;
+    justify-content: space-around;
+}
+
+.image-link {
+    background-color: #FDCA40;
+    border-radius: 1vw;
+    border: 2px solid #080708;
+    width: fit-content;
+}
+
+img {
+    width: 25vw;
+
+}
+
+.conf-message {
+    font-size: 2vw;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    background-color: #FDCA40;
+    margin: 5vw;
+    padding: 0.5vw;
+    border-radius: 1vw;
+    border: 2px solid #080708;
+    gap: 0.5vw;
+}
+
+.Yes-or-no-cont {
+    font-size: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5vw;
+}
+
+.yes-button,
+.no-button {
+    font-size: 1.5vw;
+    background-color: #FDCA40;
+    border-radius: 1vw;
+    border: 2px solid #080708;
+    padding: 0.5vw 1.5vw;
+}
