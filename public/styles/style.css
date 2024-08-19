@@ -17,6 +17,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: opacity 1s;
 }
 
 p {
@@ -65,6 +66,16 @@ img {
     gap: 5vw;
 }
 
+.yes-cont,
+.no-cont {
+    /* font-size: large;
+    width: fit-content; */
+}
+
+.fade-out {
+    opacity: 0;
+}
+
 .yes-button,
 .no-button {
     font-size: 1.5vw;
@@ -72,4 +83,5 @@ img {
     border-radius: 1vw;
     border: 2px solid #080708;
     padding: 0.5vw 1.5vw;
+    cursor: pointer;
 }
