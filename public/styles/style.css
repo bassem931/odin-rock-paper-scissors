@@ -188,5 +188,15 @@ img {
         color: white;
         background: #10c668;
     }
+}
 
+.game-over-message {
+    font-size: calc(2vw + 2rem);
+    margin-top: 30vh;
+    text-align: center;
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.2),
+        4px 4px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }

@@ -1,6 +1,7 @@
 let humanScore =0;
 let compScore = 0;
 let isGameOver = false;
+let maxScore =3;
 
 let getCompChoice = async function(){
 
@@ -185,8 +186,15 @@ let playRound = async () => {
         document.querySelector(".flex-cont").classList.remove("fade-out");
     });
 
-    if(humanScore ===2 || compScore===2){
+    if(humanScore ===maxScore || compScore===maxScore){
         isGameOver = true
+        if(humanScore === maxScore){
+            return "human";
+        } 
+
+        if(compScore === maxScore){
+            return "computer"
+        }
     }
 }
 
@@ -195,15 +203,20 @@ async function playGame() {
     //     await playRound();
     //     console.log(i);
     // }
+    let winnerName = "";
     while(!isGameOver){
-        await playRound();
+        winnerName =  await playRound();
     }
+
+    console.log(winnerName);
 
     document.querySelector(".flex-cont").style.display = "none";
     document.querySelector(".results-cont").style.display = "none";
-    document.createElement("div").textContent = "Game Over";
-    document.body.append(document.createElement("div").textContent = "Game Over")
 
+    let gameOverMessage = document.createElement("div");
+    gameOverMessage.textContent = `Game over ${winnerName} wins`;
+    gameOverMessage.classList.add("game-over-message");
+    document.body.append(gameOverMessage);
 }
 
 playGame();
