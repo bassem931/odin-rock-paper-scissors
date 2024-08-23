@@ -34,7 +34,7 @@ p {
 }
 
 .image-link {
-    background-color: #FDCA40;
+    background-color: #fdca40;
     border-radius: 1vw;
     border: 2px solid #080708;
     width: fit-content;
@@ -52,10 +52,10 @@ img {
     flex-direction: column;
     background-color: #FDCA40;
     margin: 5vw;
-    padding: 0.5vw;
+    padding: 1.5vw;
     border-radius: 1vw;
     border: 2px solid #080708;
-    gap: 0.5vw;
+    gap: 1vw;
 }
 
 .Yes-or-no-cont {
@@ -63,25 +63,46 @@ img {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 5vw;
-}
-
-.yes-cont,
-.no-cont {
-    /* font-size: large;
-    width: fit-content; */
+    gap: 15vw;
 }
 
 .fade-out {
     opacity: 0;
 }
 
+.fade-in {
+    opacity: 1;
+}
+
+.selected {
+    background-color: #10c668;
+}
+
 .yes-button,
 .no-button {
-    font-size: 1.5vw;
-    background-color: #FDCA40;
+    font-size: 2vw;
+    background-color: #fdca40;
     border-radius: 1vw;
     border: 2px solid #080708;
     padding: 0.5vw 1.5vw;
     cursor: pointer;
+}
+
+@media (hover: hover) {
+
+    /* when hover is supported */
+    .yes-button:hover {
+        color: white;
+        background: #10c668;
+    }
+
+    .no-button:hover {
+        color: white;
+        background: #df2935;
+    }
+
+    .image-link:hover {
+        background: #10c668;
+    }
+
 }
