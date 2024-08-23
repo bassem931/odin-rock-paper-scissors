@@ -1,7 +1,7 @@
-let humanScore =0;
+let humanScore = 0;
 let compScore = 0;
 let isGameOver = false;
-let maxScore =3;
+let maxScore = 3;
 
 let getCompChoice = async function(){
 
@@ -32,6 +32,7 @@ let getHumanChoice = function(){
     let imageLinks = document.querySelectorAll(".image-link");
     let MainContainer = document.querySelector(".flex-cont");
 
+    //hide results container before choosing what to play
     if(document.querySelector(".results-cont").innerHTML === ""){
         document.querySelector(".results-cont").style.display = "none";
     }
@@ -44,13 +45,13 @@ let getHumanChoice = function(){
             ev.preventDefault();
             humanChoice = link.childNodes[0].alt;
 
+            
             for (const link of imageLinks) {
                 link.classList.remove("selected");
             }
             link.classList.add("selected");
     
             let oldConfirmationMessage;
-    
             if(document.querySelector(".conf-message")){
                 oldConfirmationMessage = document.querySelector(".conf-message");
             }
