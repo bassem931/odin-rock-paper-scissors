@@ -1,3 +1,7 @@
+let humanScore =0;
+let compScore = 0;
+let isGameOver = false;
+
 let getCompChoice = async function(){
 
     return new Promise((resolve)=>{
@@ -26,6 +30,11 @@ let getHumanChoice = function(){
     return new Promise((resolve) => {
     let imageLinks = document.querySelectorAll(".image-link");
     let MainContainer = document.querySelector(".flex-cont");
+
+    if(document.querySelector(".results-cont").innerHTML === ""){
+        document.querySelector(".results-cont").style.display = "none";
+    }
+
     let humanChoice = "";
     
     for (const link of imageLinks) {
@@ -76,6 +85,7 @@ let getHumanChoice = function(){
                     {   
                         link.classList.remove("selected");
                         MainContainer.style.display = "none";
+                        MainContainer.removeChild(confirmationMessage);
                         resolve(humanChoice);
                     },{once:true});
             });
@@ -121,41 +131,82 @@ let gameLogic = async function(humanChoice,compChoice){
 }
 
 
-let startGame = async () => {
-    let humanScore =0;
-    let compScore = 0;
+let playRound = async () => {
     let compChoice = await getCompChoice();
     let humanChoice = await getHumanChoice();
-
-    console.log(humanChoice,compChoice);
     
     let winner = await gameLogic(humanChoice.toLowerCase(),compChoice.toLowerCase());
 
-    let imageChoicesCont = document.createElement("div");
-        imageChoicesCont.classList.add("conf-message");
-        imageChoicesCont.innerHTML = `Are you sure you want to pick ${humanChoice}
-            <div class="Yes-or-no-cont">
-                <a href="/" class="yes-cont"><button class="yes-button">Yes</button></a>
-                <a href="/" class="no-cont"><button class="no-button">No</button></a>
-            </div>
-            `;
+    let resultsContainer = document.querySelector(".results-cont")
     
-    // document.body.append(imageChoicesCont);
+    let resultMessage = "";
 
-    console.log(winner);
-    
     if(winner === "win"){
-        console.log(`You win, ${humanChoice} beats ${compChoice}`);
+        resultMessage = `You win, ${humanChoice} beats ${compChoice}`;
+        humanScore++;
+        document.querySelector(".human-score-num").textContent = humanScore;
     } else if(winner === "lose"){
-        console.log(`You lose, ${compChoice} beats ${humanChoice}`);
+        resultMessage = `You lose, ${compChoice} beats ${humanChoice}`;
+        compScore++;
+        document.querySelector(".comp-score-num").textContent = compScore;
     } else {
-        console.log("Tie ya negm");   
+        resultMessage = "Draw"   
     }
 
-    document.querySelector(".flex-cont").style.display = "";
-    document.querySelector(".flex-cont").classList.remove("fade-out");
+    resultsContainer.innerHTML = `
+        <div class="results-pic-cont">
+            <div class="human-result-cont">
+                <div class="result-title">Human</div>
+                <img class="mirror " src="./public/images/${humanChoice}.png" alt="${humanChoice}">
+                <div class="human-choice">${humanChoice}</div>
+            </div>
+            <div class="comp-result-cont">
+                <div class="result-title">Computer</div>
+                <img class="" src="./public/images/${compChoice}.png" alt="${compChoice}">
+                <div class="comp-choice">${compChoice}</div>
+            </div>
+        </div>
+        <div class="result-message">${resultMessage}</div>
+        <a href="/"><button class="play-next-round">Play next round</button></a>
+    `;
+
+    
+
+        resultsContainer.style.display = "";
+        // resultsContainer.classList.remove("fade-out");
+    
+    
+    
+    let nextButton = document.querySelector(".play-next-round");
+    nextButton.addEventListener("click",(ev)=>{
+        ev.preventDefault();
+        resultsContainer.style.display = "none";
+        document.querySelector(".flex-cont").style.display = "";
+        document.querySelector(".flex-cont").classList.remove("fade-out");
+    });
+
+    if(humanScore ===2 || compScore===2){
+        isGameOver = true
+    }
 }
 
-startGame();
+async function playGame() {
+    // for (let i = 0; i < 5; i++) {
+    //     await playRound();
+    //     console.log(i);
+    // }
+    while(!isGameOver){
+        await playRound();
+    }
+
+    document.querySelector(".flex-cont").style.display = "none";
+    document.querySelector(".results-cont").style.display = "none";
+    document.createElement("div").textContent = "Game Over";
+    document.body.append(document.createElement("div").textContent = "Game Over")
+
+}
+
+playGame();
+
 
 

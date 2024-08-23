@@ -10,7 +10,19 @@ h1 {
     font-size: 3vw;
     text-align: center;
     margin: 1vw;
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.2),
+        4px 4px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
+.score-cont {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
 }
 
 .flex-cont {
@@ -23,6 +35,10 @@ h1 {
 p {
     font-size: 1.5vw;
     font-weight: 700;
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.2),
+        4px 4px 8px rgba(0, 0, 0, 0.1);
+    /* Added second layer of shadow */
 }
 
 .image-cont {
@@ -88,6 +104,69 @@ img {
     cursor: pointer;
 }
 
+.results-cont {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #080708;
+    border-radius: 1vw;
+    width: 60%;
+    margin: auto;
+    padding: 1vw;
+    gap: 2vw;
+    transition: opacity 1s;
+}
+
+.results-pic-cont {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.human-result-cont,
+.comp-result-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-title,
+.human-choice,
+.comp-choice,
+.human-score,
+.comp-score,
+.result-message {
+    font-size: 1.5vw;
+    font-weight: 600;
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.2),
+        4px 4px 8px rgba(0, 0, 0, 0.1);
+    /* Added second layer of shadow */
+    letter-spacing: 1px;
+}
+
+.human-score,
+.comp-score,
+.result-message {
+    font-size: calc(1.5vw + 1rem);
+}
+
+.mirror {
+    transform: scaleX(-1);
+}
+
+.play-next-round {
+    font-size: calc(1vw + 1rem);
+    background-color: #fdca40;
+    border-radius: 1vw;
+    border: 2px solid #080708;
+    padding: 0.5vw 1.5vw;
+    cursor: pointer;
+}
+
 @media (hover: hover) {
 
     /* when hover is supported */
@@ -102,6 +181,11 @@ img {
     }
 
     .image-link:hover {
+        background: #10c668;
+    }
+
+    .play-next-round:hover {
+        color: white;
         background: #10c668;
     }
 
