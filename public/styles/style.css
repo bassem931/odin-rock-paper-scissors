@@ -123,7 +123,7 @@ input:checked+.slider:before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: opacity 1s;
+    transition: opacity 0.5s;
 }
 
 p {
@@ -188,6 +188,21 @@ img {
     background-color: #10c668;
 }
 
+.win {
+    background-color: #10c668;
+    border: 2px solid #080708;
+}
+
+.lose {
+    background-color: #df2935;
+    border: 2px solid #080708;
+}
+
+.draw {
+    background-color: #fdca40;
+    border: 2px solid #080708;
+}
+
 .yes-button,
 .no-button {
     font-size: 2vw;
@@ -209,7 +224,7 @@ img {
     margin: auto;
     padding: 1vw;
     gap: 2vw;
-    transition: opacity 1s;
+    transition: opacity 0.5s;
 }
 
 .results-pic-cont {

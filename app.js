@@ -104,10 +104,13 @@ let getHumanChoice = function(){
 
             if(isConfirmEnabled){
                 resolve(await createConfirmationMessage(link,mainContainer,humanChoice));
-            } else{
-                link.classList.remove("selected");
-                mainContainer.style.display = "none";
-                resolve(humanChoice);
+            } else {
+                mainContainer.classList.add("fade-out");
+                mainContainer.addEventListener("transitionend", () => {   
+                    link.classList.remove("selected");
+                    mainContainer.style.display = "none";
+                    resolve(humanChoice);
+                },{once:true});
             }
         });
     }
@@ -158,29 +161,37 @@ let playRound = async () => {
     let resultsContainer = document.querySelector(".results-cont")
     
     let resultMessage = "";
+    let humanBgClass = "";
+    let compBgClass = "";
 
     if(winner === "win"){
         resultMessage = `You win, ${humanChoice} beats ${compChoice}`;
         humanScore++;
         document.querySelector(".human-score-num").textContent = humanScore;
+        humanBgClass = "win";
+        compBgClass = "lose";
     } else if(winner === "lose"){
         resultMessage = `You lose, ${compChoice} beats ${humanChoice}`;
         compScore++;
         document.querySelector(".comp-score-num").textContent = compScore;
+        humanBgClass = "lose";
+        compBgClass = "win";
     } else {
-        resultMessage = "Draw"   
+        resultMessage = "Draw";
+        humanBgClass = "draw";
+        compBgClass = "draw";
     }
 
     resultsContainer.innerHTML = `
         <div class="results-pic-cont">
             <div class="human-result-cont">
                 <div class="result-title">Human</div>
-                <img class="mirror results-image" src="./public/images/${humanChoice}.png" alt="${humanChoice}">
+                <img class="mirror results-image ${humanBgClass}" src="./public/images/${humanChoice}.png" alt="${humanChoice}">
                 <div class="human-choice">${humanChoice}</div>
             </div>
             <div class="comp-result-cont">
                 <div class="result-title">Computer</div>
-                <img class="results-image" src="./public/images/${compChoice}.png" alt="${compChoice}">
+                <img class="results-image ${compBgClass}" src="./public/images/${compChoice}.png" alt="${compChoice}">
                 <div class="comp-choice">${compChoice}</div>
             </div>
         </div>
@@ -189,6 +200,17 @@ let playRound = async () => {
     `;
 
         resultsContainer.style.display = "";
+
+        //if is duplicated to change bg after 
+        // if(winner === "win"){
+
+        // } else if(winner === "lose"){
+        //     resultMessage = `You lose, ${compChoice} beats ${humanChoice}`;
+        //     compScore++;
+        //     document.querySelector(".comp-score-num").textContent = compScore;
+        // } else {
+        //     resultMessage = "Draw"   
+        // }
     
     let nextButton = document.querySelector(".play-next-round");
     nextButton.addEventListener("click",(ev)=>{
