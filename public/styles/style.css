@@ -17,12 +17,32 @@ h1 {
     text-transform: uppercase;
 }
 
+.header-line {
+    color: #080708;
+    background-color: #080708;
+    height: 2px;
+}
+
 .score-cont {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     width: 60%;
     margin: auto;
+    margin-bottom: 1vw;
+}
+
+.human-score,
+.comp-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    background-color: #fdca40;
+    border-radius: 1vw;
+    border: 2px solid #080708;
+    padding: 12px;
 }
 
 .flex-cont {
@@ -125,6 +145,10 @@ img {
     align-items: center;
 }
 
+.results-image {
+    width: 22vw;
+}
+
 .human-result-cont,
 .comp-result-cont {
     display: flex;
@@ -199,4 +223,16 @@ img {
         4px 4px 8px rgba(0, 0, 0, 0.1);
     letter-spacing: 1px;
     text-transform: uppercase;
+}
+
+footer {
+    width: 100vw;
+    height: 4vh;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FDCA40;
+    border-top: 2px solid #080708;
 }

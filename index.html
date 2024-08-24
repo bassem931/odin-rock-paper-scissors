@@ -7,23 +7,29 @@
     <link rel="stylesheet" href="./public/styles/style.css">
     <link rel="icon" type="image/ico" href="public/images/favicon.ico">
     <title>Document</title>
+    <script src="app.js" defer></script>
 </head>
 
 <body>
-    <h1>Rock, Paper and Scissors</h1>
+    <header>
+        <h1>Rock, Paper and Scissors</h1>
+
+        <hr class="header-line">
+    </header>
 
     <div class="score-cont">
         <div class="human-score">
-            Human <span class="human-score-num">0</span>
+            Human
+            <div class="human-score-num">0</div>
         </div>
         <div class="comp-score">
-            Computer <span class="comp-score-num">0</span>
+            Computer <div class="comp-score-num">0</div>
         </div>
     </div>
 
     <div class="flex-cont">
 
-        <p>Choose from Rock, Paper or Scissors</p>
+        <p>Choose from Rock, Paper or Scissors, First to 3 wins</p>
 
         <div class="image-cont">
             <a href="/" class="image-link"><img src="./public/images/paper.png" alt="paper"></a>
@@ -34,7 +40,9 @@
 
     <div class="results-cont"></div>
 
-    <script src="app.js"></script>
+    <footer>
+        Copyright 2024 Bassem Taher
+    </footer>
 </body>
 
 </html>

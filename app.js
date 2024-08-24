@@ -159,12 +159,12 @@ let playRound = async () => {
         <div class="results-pic-cont">
             <div class="human-result-cont">
                 <div class="result-title">Human</div>
-                <img class="mirror " src="./public/images/${humanChoice}.png" alt="${humanChoice}">
+                <img class="mirror results-image" src="./public/images/${humanChoice}.png" alt="${humanChoice}">
                 <div class="human-choice">${humanChoice}</div>
             </div>
             <div class="comp-result-cont">
                 <div class="result-title">Computer</div>
-                <img class="" src="./public/images/${compChoice}.png" alt="${compChoice}">
+                <img class="results-image" src="./public/images/${compChoice}.png" alt="${compChoice}">
                 <div class="comp-choice">${compChoice}</div>
             </div>
         </div>
@@ -172,12 +172,7 @@ let playRound = async () => {
         <a href="/"><button class="play-next-round">Play next round</button></a>
     `;
 
-    
-
         resultsContainer.style.display = "";
-        // resultsContainer.classList.remove("fade-out");
-    
-    
     
     let nextButton = document.querySelector(".play-next-round");
     nextButton.addEventListener("click",(ev)=>{
