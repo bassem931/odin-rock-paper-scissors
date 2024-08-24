@@ -232,7 +232,7 @@ let playRound = async () => {
     }
 }
 
-async function playGame() {
+let playGame = async function() {
     // for (let i = 0; i < 5; i++) {
     //     await playRound();
     //     console.log(i);
@@ -250,6 +250,11 @@ async function playGame() {
     let gameOverMessage = document.createElement("div");
     gameOverMessage.textContent = `Game over ${winnerName} wins`;
     gameOverMessage.classList.add("game-over-message");
+    if(winnerName === "human"){
+        gameOverMessage.classList.add("win");
+    } else{
+        gameOverMessage.classList.add("lose");
+    }
     document.body.append(gameOverMessage);
 }
 

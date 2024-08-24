@@ -305,7 +305,7 @@ img {
 
 .game-over-message {
     font-size: calc(2vw + 2rem);
-    margin-top: 30vh;
+    margin-top: 25vh;
     text-align: center;
     text-shadow:
         2px 2px 4px rgba(0, 0, 0, 0.2),
