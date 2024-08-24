@@ -2,6 +2,7 @@ let humanScore = 0;
 let compScore = 0;
 let isGameOver = false;
 let maxScore = 3;
+let isConfirmEnabled = false;
 
 let getCompChoice = async function(){
 
@@ -27,10 +28,55 @@ let getCompChoice = async function(){
     });
 }
 
+let createConfirmationMessage = async function(link,mainContainer,humanChoice) {
+    return new Promise((resolve) => {
+    let oldConfirmationMessage;
+    if(document.querySelector(".conf-message")){
+        oldConfirmationMessage = document.querySelector(".conf-message");
+    }
+
+    let confirmationMessage = document.createElement("div");
+    confirmationMessage.classList.add("conf-message");
+    confirmationMessage.innerHTML = `Are you sure you want to pick ${humanChoice}
+    <div class="Yes-or-no-cont">
+        <a href="/" class="yes-cont"><button class="yes-button">Yes</button></a>
+        <a href="/" class="no-cont"><button class="no-button">No</button></a>
+    </div>
+    `;
+
+    if(oldConfirmationMessage){
+        mainContainer.removeChild(oldConfirmationMessage);
+    }
+
+    mainContainer.append(confirmationMessage);
+
+    let yesButton = document.querySelector(".yes-button");
+    let noButton = document.querySelector(".no-button");
+
+    noButton.addEventListener("click",(ev)=>{
+        ev.preventDefault();
+            mainContainer.removeChild(confirmationMessage);
+            link.classList.remove("selected");
+    });
+
+    yesButton.addEventListener("click",(ev)=>{
+        ev.preventDefault();
+        mainContainer.classList.add("fade-out");
+        mainContainer.addEventListener("transitionend", () => 
+            {   
+                link.classList.remove("selected");
+                mainContainer.style.display = "none";
+                mainContainer.removeChild(confirmationMessage);
+                resolve(humanChoice);
+            },{once:true});
+    });
+});
+}
+
 let getHumanChoice = function(){
     return new Promise((resolve) => {
     let imageLinks = document.querySelectorAll(".image-link");
-    let MainContainer = document.querySelector(".flex-cont");
+    let mainContainer = document.querySelector(".flex-cont");
 
     //hide results container before choosing what to play
     if(document.querySelector(".results-cont").innerHTML === ""){
@@ -40,7 +86,7 @@ let getHumanChoice = function(){
     let humanChoice = "";
     
     for (const link of imageLinks) {
-        link.addEventListener("click",(ev)=>{
+        link.addEventListener("click", async (ev)=>{
             //prevent page reload
             ev.preventDefault();
             humanChoice = link.childNodes[0].alt;
@@ -50,49 +96,14 @@ let getHumanChoice = function(){
                 link.classList.remove("selected");
             }
             link.classList.add("selected");
-    
-            let oldConfirmationMessage;
-            if(document.querySelector(".conf-message")){
-                oldConfirmationMessage = document.querySelector(".conf-message");
+
+            if(isConfirmEnabled){
+                resolve(await createConfirmationMessage(link,mainContainer,humanChoice));
+            } else{
+                link.classList.remove("selected");
+                mainContainer.style.display = "none";
+                resolve(humanChoice);
             }
-    
-            let confirmationMessage = document.createElement("div");
-            confirmationMessage.classList.add("conf-message");
-            confirmationMessage.innerHTML = `Are you sure you want to pick ${humanChoice}
-            <div class="Yes-or-no-cont">
-                <a href="/" class="yes-cont"><button class="yes-button">Yes</button></a>
-                <a href="/" class="no-cont"><button class="no-button">No</button></a>
-            </div>
-            `;
-    
-            if(oldConfirmationMessage){
-                MainContainer.removeChild(oldConfirmationMessage);
-            }
-    
-            MainContainer.append(confirmationMessage);
-
-            let yesButton = document.querySelector(".yes-button");
-            let noButton = document.querySelector(".no-button");
-
-            noButton.addEventListener("click",(ev)=>{
-                ev.preventDefault();
-                    MainContainer.removeChild(confirmationMessage);
-                    link.classList.remove("selected");
-            });
-
-            yesButton.addEventListener("click",(ev)=>{
-                ev.preventDefault();
-                MainContainer.classList.add("fade-out");
-                MainContainer.addEventListener("transitionend", () => 
-                    {   
-                        link.classList.remove("selected");
-                        MainContainer.style.display = "none";
-                        MainContainer.removeChild(confirmationMessage);
-                        resolve(humanChoice);
-                    },{once:true});
-            });
-
-            
         });
     }
 });
