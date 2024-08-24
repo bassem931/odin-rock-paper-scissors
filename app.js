@@ -97,6 +97,11 @@ let getHumanChoice = function(){
             }
             link.classList.add("selected");
 
+            let confirmBoxInput = document.querySelector(".confirm-box");
+
+            console.log(confirmBoxInput.checked);
+            isConfirmEnabled = confirmBoxInput.checked;
+
             if(isConfirmEnabled){
                 resolve(await createConfirmationMessage(link,mainContainer,humanChoice));
             } else{
